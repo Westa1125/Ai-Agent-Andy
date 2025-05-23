@@ -1,0 +1,357 @@
+{
+  "correctedTools": [
+    {
+      "name": "Get Locations",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Gets all locations for a customer using customerId",
+        "method": "GET",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/locations",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {"parameters": [
+          {"name": "customerId", "value": "={{$fromAI.customerId}}"}
+        ]},
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]}
+      }
+    },
+    {
+      "name": "Create Location1",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Creates a new service location under a customer",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/locations",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": {
+          "name": "={{$fromAI.locationName}}",
+          "customerId": "={{$fromAI.customerId}}",
+          "address": {
+            "street": "={{$fromAI.street}}",
+            "unit": "={{$fromAI.unit}}",
+            "city": "={{$fromAI.city}}",
+            "state": "={{$fromAI.state}}",
+            "zip": "={{$fromAI.zip}}",
+            "country": "={{$fromAI.country || 'USA'}}"
+          }
+        }
+      }
+    },
+    {
+      "name": "Create Customer Contact",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Adds a new contact to a customer account",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/customers/{{$fromAI.customerId}}/contacts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": {
+          "type": "={{$fromAI.contactType}}",
+          "value": "={{$fromAI.contactValue}}",
+          "memo": "={{$fromAI.memo}}"
+        }
+      }
+    },
+    {
+      "name": "Create New Customer",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Creates a new customer",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/customers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": {
+          "name": "={{$fromAI.customerName}}",
+          "address": {
+            "street": "={{$fromAI.billStreet}}",
+            "unit": "={{$fromAI.billUnit}}",
+            "city": "={{$fromAI.billCity}}",
+            "state": "={{$fromAI.billState}}",
+            "zip": "={{$fromAI.billZip}}",
+            "country": "={{$fromAI.billCountry || 'USA'}}"
+          },
+          "locations": [
+            {
+              "name": "={{$fromAI.locationName}}",
+              "address": {
+                "street": "={{$fromAI.street}}",
+                "unit": "={{$fromAI.unit}}",
+                "city": "={{$fromAI.city}}",
+                "state": "={{$fromAI.state}}",
+                "zip": "={{$fromAI.zip}}",
+                "country": "={{$fromAI.country || 'USA'}}"
+              }
+            }
+          ],
+          "contacts": [
+            {"type": "MobilePhone", "value": "={{$fromAI.phone}}"},
+            {"type": "Email", "value": "={{$fromAI.email}}"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Appointment",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Adds a new appointment to an existing job",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/jpm/v2/tenant/1597802659/appointments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": {
+          "jobId": "={{$fromAI.jobId}}",
+          "start": "={{$fromAI.start}}",
+          "end": "={{$fromAI.end}}",
+          "arrivalWindowStart": "={{$fromAI.arrivalWindowStart}}",
+          "arrivalWindowEnd": "={{$fromAI.arrivalWindowEnd}}",
+          "technicianIds": "={{$fromAI.technicianIds}}",
+          "specialInstructions": "={{$fromAI.specialInstructions}}"
+        }
+      }
+    },
+    {
+      "name": "Create Purchase Order",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Create a new purchase order",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/inventory/v2/tenant/1597802659/purchase-orders",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": {
+          "vendorId": "={{$fromAI.vendorId}}",
+          "typeId": "={{$fromAI.typeId}}",
+          "businessUnitId": "={{$fromAI.businessUnitId}}",
+          "inventoryLocationId": "={{$fromAI.inventoryLocationId}}",
+          "shipTo": {
+            "description": "={{$fromAI.shipDescription}}",
+            "address": {
+              "street": "={{$fromAI.shipStreet}}",
+              "unit": "={{$fromAI.shipUnit}}",
+              "city": "={{$fromAI.shipCity}}",
+              "state": "={{$fromAI.shipState}}",
+              "zip": "={{$fromAI.shipZip}}",
+              "country": "={{$fromAI.shipCountry || 'USA'}}"
+            }
+          },
+          "vendorInvoiceNumber": "={{$fromAI.vendorInvoiceNumber}}",
+          "impactsTechnicianPayroll": "={{$fromAI.impactsTechnicianPayroll}}",
+          "memo": "={{$fromAI.memo}}",
+          "date": "={{$fromAI.date}}",
+          "requiredOn": "={{$fromAI.requiredOn}}",
+          "tax": "={{$fromAI.tax}}",
+          "shipping": "={{$fromAI.shipping}}",
+          "items": "={{$fromAI.poItems}}"
+        }
+      }
+    },
+    {
+      "name": "Update Customer",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Updates a customer",
+        "method": "PATCH",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/customers/{{$fromAI.customerId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": {
+          "name": "={{$fromAI.name}}",
+          "address": {
+            "street": "={{$fromAI.street}}",
+            "unit": "={{$fromAI.unit}}",
+            "city": "={{$fromAI.city}}",
+            "state": "={{$fromAI.state}}",
+            "zip": "={{$fromAI.zip}}",
+            "country": "={{$fromAI.country}}"
+          },
+          "doNotMail": "={{$fromAI.doNotMail}}",
+          "doNotService": "={{$fromAI.doNotService}}",
+          "tagTypeIds": "={{$fromAI.tagTypeIds}}"
+        }
+      }
+    },
+    {
+      "name": "Update Contact",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Updates a customer contact",
+        "method": "PATCH",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/contacts/{{$fromAI.contactId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": {
+          "name": "={{$fromAI.name}}",
+          "title": "={{$fromAI.title}}",
+          "referenceId": "={{$fromAI.referenceId}}",
+          "isArchived": "={{$fromAI.isArchived}}"
+        }
+      }
+    },
+    {
+      "name": "Update Job",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Updates a job",
+        "method": "PATCH",
+        "url": "https://api.servicetitan.io/jpm/v2/tenant/1597802659/jobs/{{$fromAI.jobId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": {
+          "summary": "={{$fromAI.summary}}",
+          "priority": "={{$fromAI.priority}}",
+          "campaignId": "={{$fromAI.campaignId}}",
+          "jobTypeId": "={{$fromAI.jobTypeId}}",
+          "businessUnitId": "={{$fromAI.businessUnitId}}"
+        }
+      }
+    },
+    {
+      "name": "Get Payments",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Retrieves a list of payments",
+        "method": "GET",
+        "url": "https://api.servicetitan.io/accounting/v2/tenant/1597802659/payments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {"parameters": [
+          {"name": "modifiedOnOrAfter", "value": "={{$fromAI.modifiedAfter}}"},
+          {"name": "page", "value": "={{$fromAI.page}}"},
+          {"name": "pageSize", "value": "={{$fromAI.pageSize}}"}
+        ]},
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]}
+      }
+    },
+    {
+      "name": "Cancel Job",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Cancels a job",
+        "method": "PUT",
+        "url": "https://api.servicetitan.io/jpm/v2/tenant/1597802659/jobs/{{$fromAI.jobId}}/cancel",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": {"reasonId": "={{$fromAI.reasonId}}", "memo": "={{$fromAI.memo}}"}
+      }
+    },
+    {
+      "name": "Book Job",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "parameters": {
+        "toolDescription": "Creates a job",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/jpm/v2/tenant/1597802659/jobs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [
+          {"name": "ST-App-Key", "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"},
+          {"name": "Content-Type", "value": "application/json"}
+        ]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": {
+          "customerId": "={{$fromAI.customerId}}",
+          "locationId": "={{$fromAI.locationId}}",
+          "businessUnitId": "={{$fromAI.businessUnitId}}",
+          "jobTypeId": "={{$fromAI.jobTypeId}}",
+          "priority": "={{$fromAI.priority}}",
+          "campaignId": "={{$fromAI.campaignId}}",
+          "appointments": [
+            {"start": "={{$fromAI.start}}", "end": "={{$fromAI.end}}", "technicianIds": "={{$fromAI.technicianIds}}"}
+          ],
+          "summary": "={{$fromAI.summary}}"
+        }
+      }
+    }
+  ]
+}
