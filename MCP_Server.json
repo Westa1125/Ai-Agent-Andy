@@ -1,0 +1,3593 @@
+{
+  "name": "ServiceTitan MCP Server",
+  "nodes": [
+    {
+      "parameters": {
+        "toolDescription": "Gets all locations for a customer using customerID. Use this after identifying the customer account.\nInformation needed: customerID is required to look up locations.",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/locations",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "customerID",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        -1120,
+        -160
+      ],
+      "id": "a8552ced-6642-4b93-9268-42677ced3aa5",
+      "name": "Get Locations",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Creates a new service location under an existing customer. Use this if location lookup fails or if the customer reports a new address.",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/locations",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=name",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `location name \"CustomerName House\"`, 'string') }}"
+            },
+            {
+              "name": "=street",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `street number and name`, 'string') }}"
+            },
+            {
+              "name": "=unit",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=city",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=state",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters4_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=zip",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=country",
+              "value": "USA"
+            },
+            {
+              "name": "=customerId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters7_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=type",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters8_Value', `Contact Type`, 'string') }}"
+            },
+            {
+              "name": "=value",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters9_Value', `phone number or Email`, 'string') }}"
+            },
+            {
+              "name": "=memo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters10_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=tagTypeIds",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters11_Value', ``, 'string') }}"
+            },
+            {
+              "name": "createdBy",
+              "value": "AndyAI"
+            },
+            {
+              "name": "source",
+              "value": "AI Booking Flow"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        -940,
+        -160
+      ],
+      "id": "812c0cee-089c-47b9-ab34-fc28e80a09f1",
+      "name": "Create Location1",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets all customer contacts based on customer id and gives you contactmethodID",
+        "url": "=https://api.servicetitan.io/crm/v2/tenant/1597802659/customers/{{ $fromAI.customerID }}/contacts?page=1&pageSize=50&includeTotal=true",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        -760,
+        -160
+      ],
+      "id": "198f9a40-5eb5-4b71-82e3-5b68d7b4de5f",
+      "name": "Get Customer Contacts1",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Search customers by address",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/customers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "street"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "ST-App-Key",
+              "valueProvider": "fieldValue",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            },
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -580,
+        -540
+      ],
+      "id": "430942bd-e490-4beb-8a88-8c5a6bc1d76e",
+      "name": "Search Customer by Address",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Search customers by name",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/customers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "name"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "ST-App-Key",
+              "valueProvider": "fieldValue",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            },
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        -540
+      ],
+      "id": "ada86acb-df28-4b13-a337-30661d089cf7",
+      "name": "Search Customer by Name",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Looks up a customer’s upcoming or in-progress appointments. Use this to check if a job is already scheduled before booking a new one.",
+        "url": "=https://api.servicetitan.io/jpm/v2/tenant/1597802659/appointments?",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "customerId"
+            },
+            {
+              "name": "status",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "page",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "pageSize",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "ST-App-Key",
+              "valueProvider": "fieldValue",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            },
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        1880,
+        260
+      ],
+      "id": "197d4b25-953b-4dfd-9225-7c9b4b4e125a",
+      "name": "Look Up Customer Appointments",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Adds a new contact to a customer’s account. Use when the customer provides a new name, email, or phone number to add to their profile.",
+        "method": "POST",
+        "url": "=https://api.servicetitan.io/crm/v2/tenant/1597802659/customers/{{$input.customerId}}/contacts\n",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "ST-App-Key",
+              "valueProvider": "fieldValue",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            },
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "parametersBody": {
+          "values": [
+            {
+              "name": "name"
+            },
+            {
+              "name": "email",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "phoneNumbers",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "locationID",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -220,
+        -820
+      ],
+      "id": "b0090a0f-ab85-4590-b1d0-e6b5cceab0c7",
+      "name": "Create Customer Contact",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Creates a new customer with name, contact info, and primary address. Use this when a brand-new customer calls in to schedule service.",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/customers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "valueProvider": "fieldValue",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "parametersBody": {
+          "values": [
+            {
+              "name": "=name"
+            },
+            {
+              "name": "=type"
+            },
+            {
+              "name": "=doNotMail",
+              "valueProvider": "fieldValue",
+              "value": "falst"
+            },
+            {
+              "name": "=doNotService",
+              "valueProvider": "fieldValue",
+              "value": "false"
+            },
+            {
+              "name": "=address",
+              "valueProvider": "fieldValue"
+            },
+            {
+              "name": "=street"
+            },
+            {
+              "name": "=unit"
+            },
+            {
+              "name": "=city"
+            },
+            {
+              "name": "=state"
+            },
+            {
+              "name": "=zip"
+            },
+            {
+              "name": "=country",
+              "valueProvider": "fieldValue",
+              "value": "=USA"
+            },
+            {
+              "name": "=contacts"
+            },
+            {
+              "name": "=type",
+              "valueProvider": "fieldValue",
+              "value": "MobilePhone"
+            },
+            {
+              "name": "=value"
+            },
+            {
+              "name": "=memo",
+              "valueProvider": "fieldValue",
+              "value": "Primary"
+            },
+            {
+              "name": "=type",
+              "valueProvider": "fieldValue",
+              "value": "Email"
+            },
+            {
+              "name": "=value"
+            },
+            {
+              "name": "=memo",
+              "valueProvider": "fieldValue",
+              "value": "main email"
+            },
+            {
+              "name": "applicationGuid",
+              "valueProvider": "fieldValue",
+              "value": "andy-ai-customer-creator"
+            },
+            {
+              "name": "source",
+              "valueProvider": "fieldValue",
+              "value": "AI Phone Booking"
+            },
+            {
+              "name": "createdBy",
+              "valueProvider": "fieldValue",
+              "value": "Andy"
+            }
+          ]
+        },
+        "placeholderDefinitions": {
+          "values": [
+            {
+              "name": "type",
+              "description": "this should be either \"Residential\" or \"Commercial\"",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -960,
+        -720
+      ],
+      "id": "fa12b844-49e2-450e-98b8-0415a923720f",
+      "name": "Create New Customer",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets a list of jobs associated with a specific customer or location. Use to check if work is already scheduled or recently completed.",
+        "url": "https://api.servicetitan.io/jpm/v2/tenant/1597802659/jobs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "customerId",
+              "value": "={{ $fromAI.customerId }}"
+            },
+            {
+              "name": "locationId",
+              "value": "={{ $fromAI.locationId }}"
+            },
+            {
+              "name": "statuses",
+              "value": "={{ $fromAI.jobStatus}}"
+            },
+            {
+              "name": "appointmentStatus",
+              "value": "={{ $fromAI.appointmentStatus }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Jobs",
+      "position": [
+        900,
+        260
+      ],
+      "id": "4fb9bb6a-93c2-4a4e-bcfa-430b59a15188",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Creates an appointment for a job with the customer’s preferred time and technician assignment.",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/jpm/v2/tenant/1597802659/appointments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "jobId",
+              "value": "={{$fromAI.jobId}}"
+            },
+            {
+              "name": "scheduledArrivalStart",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `ISO 8601 timestamp`, 'string') }}"
+            },
+            {
+              "name": "scheduledArrivalEnd",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', `ISO 8601 timestamp after scheduledArrivalStart`, 'string') }}"
+            },
+            {
+              "name": "technicianIds",
+              "value": "={{$fromAI.technicianIds}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Create Appointment",
+      "position": [
+        1720,
+        260
+      ],
+      "id": "31fe96b6-6cbc-4857-92c1-597382995ff9",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves invoice records for a specific job or customer. Use to check if the work has been billed or paid.",
+        "url": "https://api.servicetitan.io/accounting/v2/tenant/1597802659/export/invoices",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "jobId",
+              "value": "={{ $fromAI.jobId }}"
+            },
+            {
+              "name": "customerId",
+              "value": "={{ $fromAI.customerId }}"
+            },
+            {
+              "name": "modifiedOnOrAfter",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', `Date in ISO 8601 format`, 'string') }}"
+            },
+            {
+              "name": "statuses",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', `this could be paid or open`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Invoices",
+      "position": [
+        -260,
+        -120
+      ],
+      "id": "484139ce-04ff-4d86-a2a4-c7e4e9ba7d89",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets all memberships for a specific customer. Use this to check if a customer has an active or expired membership.",
+        "url": "https://api.servicetitan.io/memberships/v2/tenant/1597802659/memberships",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "customerIds",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `The customer id of the customer you want to return membership information about. If empty then not a membership customer.`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Memberships",
+      "position": [
+        -40,
+        -140
+      ],
+      "id": "29b83473-f2a4-46ca-a6eb-50e0b0931ae4",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets all installed equipment for a specific location. Use this to verify model, serial number, and install date before quoting or booking service.",
+        "url": "https://api.servicetitan.io/equipmentsystems/v2/tenant/1597802659/installed-equipment",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "locationIds",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `locationID`, 'string') }}"
+            },
+            {
+              "name": "customerId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Customer Id`, 'string') }}"
+            },
+            {
+              "name": "page",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', ``, 'string') }}"
+            },
+            {
+              "name": "pageSize",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Installed Equipment",
+      "position": [
+        -720,
+        -880
+      ],
+      "id": "4123205e-6ed7-462e-b4d4-542b5d87e994",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Assigns one or more technicians to an appointment. Use after an appointment is created to ensure dispatch is set.",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/dispatch/v2/tenant/1597802659/appointment-assignments/assign-technicians",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "jobAppointmentId",
+              "value": "={{ $fromAI.appointmentId }}"
+            },
+            {
+              "name": "technicianIds",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Can be multiple techs. example 101, 105, 104`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Assign Technicians",
+      "position": [
+        2320,
+        240
+      ],
+      "id": "f5ed11ea-db00-4a9e-84b5-30cd6bc0ebbd",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Lists all published forms in ServiceTitan. Use this to match available forms for submission, like inspections or maintenance checklists.",
+        "url": "https://api.servicetitan.io/forms/v2/tenant/1597802659/forms",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `name of the form`, 'string') }}"
+            },
+            {
+              "name": "status",
+              "value": "Published"
+            },
+            {
+              "name": "hasTriggers",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', `Can be true or false`, 'string') }}"
+            },
+            {
+              "name": "hasConditionalLogic",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', `Can be true or false`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Forms",
+      "position": [
+        1180,
+        660
+      ],
+      "id": "64bf705d-2f40-4c8c-b80a-85ac62dbf3e1",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets submitted forms tied to a job, customer, or location. Use this to verify form completion or pull inspection results.",
+        "url": "https://api.servicetitan.io/forms/v2/tenant/1597802659/submissions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "formIds",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `form id number`, 'string') }}"
+            },
+            {
+              "name": "ownerType",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `this could be Job, Customer, Location, etc.`, 'string') }}"
+            },
+            {
+              "name": "owners[0].id",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', `job id that you want the form from`, 'string') }}"
+            },
+            {
+              "name": "owners[0].type",
+              "value": "Job"
+            },
+            {
+              "name": "status",
+              "value": "Completed"
+            },
+            {
+              "name": "submittedOnOrAfter",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', `Time Filter. (ISO)`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Form Submissions",
+      "position": [
+        1380,
+        660
+      ],
+      "id": "d14800a0-74b0-4d82-a459-b76f1fb3b650",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets inventory adjustments for a specific truck or warehouse. Use this to track materials used, lost, or manually changed.",
+        "url": "https://api.servicetitan.io/inventory/v2/tenant/1597802659/adjustments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "number",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `Filter by PO/reference number`, 'string') }}"
+            },
+            {
+              "name": "inventoryLocationIds",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Only pull from specific warehouse or truck. Use inventory locationID`, 'string') }}"
+            },
+            {
+              "name": "dateOnOrAfter",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', `Filter recent changes`, 'string') }}"
+            },
+            {
+              "name": "createdOnOrAfter",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', `Alternative date filter. This filters and gives everything on or after a date`, 'string') }}"
+            },
+            {
+              "name": "modifiedOnOrAfter",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters4_Value', `If tracking recent updates. This finds items modified on or after date specified.`, 'string') }}"
+            },
+            {
+              "name": "syncStatuses",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', `Pending, Success, etc.`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Adjustments",
+      "position": [
+        980,
+        680
+      ],
+      "id": "901c76a2-0545-45da-86f8-01d054c84123",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Creates a purchase order for job materials or inventory restock. Use when a technician or customer order requires external parts.",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/inventory/v2/tenant/1597802659/purchase-orders",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "vendorId",
+              "value": "={{ $fromAI.vendorId }}"
+            },
+            {
+              "name": "businessUnitId",
+              "value": "={{ $fromAI.businessUnitId }}"
+            },
+            {
+              "name": "items",
+              "value": "={{ $fromAI.poItems }}"
+            },
+            {
+              "name": "jobId",
+              "value": "={{ $fromAI.jobId }}"
+            },
+            {
+              "name": "memo",
+              "value": "={{ $fromAI.poMemo }}"
+            },
+            {
+              "name": "requiredOn",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', `Date part is expected to arrive`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Create Purchase Order",
+      "position": [
+        1700,
+        660
+      ],
+      "id": "9d5c44ce-bfc3-42b3-9804-56b036e16d4d",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves recent call logs based on phone number or date. Use to verify a customer's call history or match a number to a job.",
+        "url": "https://api.servicetitan.io/telecom/v3/tenant/1597802659/calls",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "callerPhoneNumber",
+              "value": "={{ $fromAI.callerPhoneNumber }}"
+            },
+            {
+              "name": "phoneNumberCalled",
+              "value": "={{ $fromAI.phoneNumberCalled }}"
+            },
+            {
+              "name": "createdOnOrAfter",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', `filters calls by date. Gets calls after this specified date. Date format should be ISO 8601 timestamp`, 'string') }}"
+            },
+            {
+              "name": "createdBefore",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', `filters calls by date. Gets calls before this specified date. Date format should be ISO 8601 timestamp`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Calls",
+      "position": [
+        1880,
+        660
+      ],
+      "id": "b0119785-1627-4eaa-9f89-50b92f615305",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Creates an internal task assigned to an office staff member. Use this when a human needs to handle something you can’t complete.",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/taskmanagement/v2/tenant/1597802659/tasks",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `The title of the task `, 'string') }}"
+            },
+            {
+              "name": "=assignedToId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Employee ID of the person responsible for completing the task`, 'string') }}"
+            },
+            {
+              "name": "customerId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', `The associated customerId. This can help link context`, 'string') }}"
+            },
+            {
+              "name": "description",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', `description of the task`, 'string') }}"
+            },
+            {
+              "name": "dueDate",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters4_Value', `date the task should be completed`, 'string') }}"
+            },
+            {
+              "name": "priority",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', `priority of the task: Normal, High, Urgent, Low`, 'string') }}"
+            },
+            {
+              "name": "tags",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters6_Value', `Tag id to add`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Create Task",
+      "position": [
+        1780,
+        -740
+      ],
+      "id": "7c29cf53-a50a-43b1-ac83-4c91a4687096",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Creates a new equipment record for a customer location. Use this after a unit is installed or reported by the customer.",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/equipmentsystems/v2/tenant/1597802659/installed-equipment",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=locationId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `location id of the equipment`, 'string') }}"
+            },
+            {
+              "name": "=name",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Equipment name. \"upstairs condenser\" \"Trane 3 ton Condenser\"`, 'string') }}"
+            },
+            {
+              "name": "=installedOn",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=serialNumber",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=manufacturer",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters4_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=model",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=memo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters6_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Create Equipment",
+      "position": [
+        -600,
+        -880
+      ],
+      "id": "3a107df7-201d-4f52-be18-61a4b0e49375",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Updates an existing customer's name, email, phone numbers, or mailing preferences. Use when the customer asks to change their profile information.",
+        "method": "PUT",
+        "url": "=https://api.servicetitan.io/crm/v2/tenant/1597802659/customers/{{$fromAI.customerId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=name",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=email",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=phoneNumbers",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=number",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=type",
+              "value": "Mobile"
+            },
+            {
+              "name": "=doNotMail",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=doNotService",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters6_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Update Customer",
+      "position": [
+        -840,
+        -720
+      ],
+      "id": "e9660bfe-0b72-449d-a860-334434007022",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Updates a customer contact’s name, phone, email, or notes. Use this when the customer provides updated contact info.",
+        "method": "=PUT",
+        "url": "=https://api.servicetitan.io/crm/v2/tenant/1597802659/contacts/{{$fromAI.contactId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `contact name`, 'string') }}"
+            },
+            {
+              "name": "email",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', ``, 'string') }}"
+            },
+            {
+              "name": "phoneNumbers",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', ``, 'string') }}"
+            },
+            {
+              "name": "memo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', ``, 'string') }}"
+            },
+            {
+              "name": "title",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters4_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Update Contact",
+      "position": [
+        -100,
+        -760
+      ],
+      "id": "b1e14228-eb16-4b88-9247-8ed966e3858e",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Updates a job’s summary, priority, or metadata using the job ID. Use this when the customer changes job details or follow-up notes are needed.",
+        "method": "PUT",
+        "url": "=https://api.servicetitan.io/jpm/v2/tenant/1597802659/jobs/{{$fromAI.jobId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "summary",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `updated job summary`, 'string') }}"
+            },
+            {
+              "name": "priority",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `updated priority`, 'string') }}"
+            },
+            {
+              "name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Name', ``, 'string') }}",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', `customers po reference number`, 'string') }}"
+            },
+            {
+              "name": "referenceId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', `updated reference id number`, 'string') }}"
+            },
+            {
+              "name": "tags",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters4_Value', `tag id to add`, 'string') }}"
+            },
+            {
+              "name": "businessUnitId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', `updated business unit id `, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Update Job",
+      "position": [
+        1020,
+        260
+      ],
+      "id": "41d3ea70-1588-4c58-a1d0-dec50c3e65c1",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Deletes a specific appointment by ID. Use this if the customer wants to cancel a scheduled job or remove an appointment booked in error.",
+        "method": "DELETE",
+        "url": "=https://api.servicetitan.io/jpm/v2/tenant/1597802659/appointments/{{$fromAI.appointmentId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Delete Appointment",
+      "position": [
+        1460,
+        260
+      ],
+      "id": "25e236ae-c145-49f3-aba7-ab9a2e3137d8",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Deletes a contact from a customer’s account using the contact ID. Use this when a contact is incorrect, duplicate, or requested to be removed.",
+        "method": "DELETE",
+        "url": "=https://api.servicetitan.io/crm/v2/tenant/1597802659/contacts/{{$fromAI.contactId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Delete Contact",
+      "position": [
+        -380,
+        -800
+      ],
+      "id": "68def347-4ae6-450e-b4d4-a93d769d7542",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Deletes a piece of installed equipment from a customer’s location. Use if it was logged incorrectly or removed from service.",
+        "method": "DELETE",
+        "url": "=https://api.servicetitan.io/equipmentsystems/v2/tenant/1597802659/installed-equipment/{{$fromAI.equipmentId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Delete Equipment",
+      "position": [
+        -480,
+        -900
+      ],
+      "id": "7b67c3a7-bb72-4422-b0f7-097a22edcbe8",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets all appointments tied to a specific job. Use this to check what has been scheduled or completed before booking or editing.",
+        "url": "https://api.servicetitan.io/jpm/v2/tenant/1597802659/appointments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "jobId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            },
+            {
+              "name": "status",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Filter (e.g. Scheduled, Done, Canceled)`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Job Appointments",
+      "position": [
+        2100,
+        640
+      ],
+      "id": "60e3a275-ca24-4e83-9db2-ccbe98a8e785",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Reschedules an existing appointment by updating the technician’s start/end time and the customer’s arrival window.",
+        "method": "PATCH",
+        "url": "=https://api.servicetitan.io/jpm/v2/tenant/1597802659/appointments/{{$fromAI.appointmentId}}/reschedule",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=start",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `new start time`, 'string') }}"
+            },
+            {
+              "name": "=end",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `approximate end time of appointment`, 'string') }}"
+            },
+            {
+              "name": "=arrivalWindowStart",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=arrivalWindowEnd",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Reschedule Appointment",
+      "position": [
+        1580,
+        240
+      ],
+      "id": "837038c2-b86b-4d42-bef0-f79609f090cb",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Searches pricebook services for quoting. Use this to pull flat-rate prices or item descriptions for estimates.",
+        "url": "https://api.servicetitan.io/pricebook/v2/tenant/1597802659/services",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "specifyQuery": "json",
+        "jsonQuery": "=[\n  { \"name\": \"searchTerm\", \"value\": \"={{ $fromAI.serviceKeyword }}\" },\n  { \"name\": \"active\", \"value\": \"true\" },\n  { \"name\": \"type\", \"value\": \"={{ $fromAI.itemType }}\" },\n  { \"name\": \"page\", \"value\": \"1\" },\n  { \"name\": \"pageSize\", \"value\": \"40\" }\n]\n",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Pricebook Items",
+      "position": [
+        2300,
+        640
+      ],
+      "id": "0b27ae53-ecd3-45a6-891b-7db47d08631f",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves internal tasks assigned to a user, customer, or job. Use this to follow up on escalations or check if the office has open tasks.",
+        "url": "https://api.servicetitan.io/taskmanagement/v2/tenant/1597802659/tasks",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "specifyQuery": "json",
+        "jsonQuery": "=[\n  { \"name\": \"assignedToId\", \"value\": \"={{ $fromAI.assignedToId }}\" },\n  { \"name\": \"customerId\", \"value\": \"={{ $fromAI.customerId }}\" },\n  { \"name\": \"jobId\", \"value\": \"={{ $fromAI.jobId }}\" },\n  { \"name\": \"status\", \"value\": \"={{ $fromAI.taskStatus }}\" },\n  { \"name\": \"page\", \"value\": \"1\" },\n  { \"name\": \"pageSize\", \"value\": \"50\" }\n]\n",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Tasks",
+      "position": [
+        1960,
+        -740
+      ],
+      "id": "865122d1-c2ac-4952-8d91-86d00e5e2b78",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Updates a task’s status, notes, or assignment. Use this when marking a task complete or reassigning it to someone else.",
+        "method": "PATCH",
+        "url": "=https://api.servicetitan.io/taskmanagement/v2/tenant/1597802659/tasks/{{$fromAI.taskId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  { \"name\": \"status\", \"value\": \"={{ $fromAI.taskStatus }}\" },\n  { \"name\": \"memo\", \"value\": \"={{ $fromAI.taskMemo }}\" },\n  { \"name\": \"assignedToId\", \"value\": \"={{ $fromAI.assignedToId }}\" },\n  { \"name\": \"dueDate\", \"value\": \"={{ $fromAI.dueDate }}\" }\n]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Update Task",
+      "position": [
+        1800,
+        -580
+      ],
+      "id": "1827f3e0-6e0c-41d0-9abf-1ced5c80be6f",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Submits a completed form, such as an inspection or post-job survey, tied to a job, customer, or appointment.",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/forms/v2/tenant/1597802659/submissions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"formId\": {{$fromAI.formId}},\n  \"owner\": {\n    \"type\": \"Job\",\n    \"id\": {{$fromAI.jobId}}\n  },\n  \"units\": {{$fromAI.formUnits}},\n  \"status\": \"Completed\",\n  \"submittedOn\": {{$fromAI.submittedOn}}\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Create Form Submission",
+      "position": [
+        2640,
+        640
+      ],
+      "id": "836216eb-a724-4bc6-ae62-6a9b46c3bcf6",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets a list of active technicians. Use this to assign techs, look up IDs, or confirm availability.",
+        "url": "https://api.servicetitan.io/settings/v2/tenant/1597802659/employees",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "active",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            },
+            {
+              "name": "role",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `either a Technician or Employee`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Technicians",
+      "position": [
+        2160,
+        240
+      ],
+      "id": "967b4707-7788-4be0-8322-3198faaa9dc2",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets active business units (HVAC, plumbing, etc.). Use this when assigning a trade to a job or retrieving BU IDs.",
+        "url": "https://api.servicetitan.io/settings/v2/tenant/1597802659/business-units",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "active",
+              "value": "true"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Business Units",
+      "position": [
+        1340,
+        260
+      ],
+      "id": "2b546e7c-6702-4b2a-b9e5-f6325cea558d",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets all active job types used to categorize service work. Use this to assign a job type when creating or updating a job.",
+        "url": "https://api.servicetitan.io/jpm/v2/tenant/1597802659/job-types",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "active",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `What kind of items should be returned (only active items will be returned by default)\nValues: [True, Any, False]`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Job Types",
+      "position": [
+        1220,
+        260
+      ],
+      "id": "e5fe3a18-0f59-4872-8ec9-9061feb1aaab",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets a list of active vendors for creating purchase orders. Use this to look up vendor IDs or filter by name.",
+        "url": "https://api.servicetitan.io/inventory/v2/tenant/1597802659/vendors",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `Vendor name`, 'string') }}"
+            },
+            {
+              "name": "active",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `true, false, or any`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Vendors",
+      "position": [
+        -700,
+        -720
+      ],
+      "id": "77ab4bcf-f272-4e73-9a21-01ee6ab35efb",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets a list of active tags that can be applied to jobs, appointments, or customers. Use this to look up tag IDs by name.",
+        "url": "https://api.servicetitan.io/settings/v2/tenant/1597802659/tags",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `tag name`, 'string') }}"
+            },
+            {
+              "name": "active",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Tags",
+      "position": [
+        2140,
+        -760
+      ],
+      "id": "73958402-f32c-4847-bc43-e39bf9790642",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves full invoice details by ID from ServiceTitan, including billing items, payments, job links, and status. This tool is essential for validating invoice data, reviewing billing accuracy, or displaying invoice history in a customer view.",
+        "url": "=https://api.servicetitan.io/accounting/v2/tenant/1597802659/invoices/{{$fromAI.invoiceId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Invoice by ID",
+      "position": [
+        3160,
+        -160
+      ],
+      "id": "53f70a83-b422-49c4-ab2e-4848ec0bdef2",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves a list of customer payments from ServiceTitan, including payment amounts, methods, and associated invoices or jobs. Useful for reconciling revenue, generating financial reports, or validating payment statuses in real-time.",
+        "url": "https://api.servicetitan.io/accounting/v2/tenant/1597802659/export/payments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "=modifiedAfter",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            },
+            {
+              "name": "=page",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Enter page number to fetch`, 'string') }}"
+            },
+            {
+              "name": "=pageSize",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', `Enter number of records per page (e.g., 100)`, 'string') }}"
+            },
+            {
+              "name": "=includeTotal",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', `Include total record count? (true/false)`, 'string') }}"
+            },
+            {
+              "name": "=sort",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters4_Value', `Enter sort field with direction (e.g., -ModifiedOn)`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Payments",
+      "position": [
+        3300,
+        -160
+      ],
+      "id": "dcd959a7-3cbb-48eb-8fd4-0ef6058079a5",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Uploads a file (e.g., PDF, image, document) as an attachment to a specified job in ServiceTitan. This tool is used to add technician forms, estimates, invoices, or supporting documents to a job record. File content must be base64-encoded or provided as multipart/form-data, depending on the API requirements.",
+        "method": "POST",
+        "url": "=https://api.servicetitan.io/forms/v2/tenant/1597802659/jobs/{{$fromAI.jobId}}/attachments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Input_Data_Field_Name', `binary file name`, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Upload File to Job",
+      "position": [
+        3160,
+        680
+      ],
+      "id": "6bcd50ec-afbb-44e1-a5ea-a6fa4d7f069f",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves a paginated list of marketing campaigns from the ServiceTitan Marketing API. This tool allows filtering by campaign name, status, creation/modification date, and phone number. Useful for campaign reporting, validation, or automation workflows that depend on campaign metadata.",
+        "url": "https://api.servicetitan.io/marketing/v2/tenant/1597802659/campaigns",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "active",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `What kind of items should be returned (only active items will be returned by default)\nValues: [True, Any, False]`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Campaigns",
+      "position": [
+        2000,
+        240
+      ],
+      "id": "c2fe4212-8dbd-4cc1-bb09-176a78d124ed",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "3ff88551-ade5-4918-a76d-a957a2358eb6"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        -420
+      ],
+      "id": "796a913a-69c2-48f9-8ffb-231c79a27262",
+      "name": "MCP Server Trigger original",
+      "webhookId": "3ff88551-ade5-4918-a76d-a957a2358eb6"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -500,
+        100
+      ],
+      "id": "96c4a5a8-fd04-416a-a99c-04732aefd5e2",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Call the tools available to get a list of buisness units, job types, and campaigns to determine what ids to use",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -240,
+        100
+      ],
+      "id": "f482b8f3-44eb-4805-aec0-efeb15d7ed68",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "73L9YsY2AXrdAS3w",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets all active job types used to categorize service work. Use this to assign a job type when creating or updating a job.",
+        "url": "https://api.servicetitan.io/jpm/v2/tenant/1597802659/job-types",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "active",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `What kind of items should be returned (only active items will be returned by default)\nValues: [True, Any, False]`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Job Types1",
+      "position": [
+        -160,
+        400
+      ],
+      "id": "f6ca6840-09f4-4b52-b899-64920035bd3d",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Gets active business units (HVAC, plumbing, etc.). Use this when assigning a trade to a job or retrieving BU IDs.",
+        "url": "https://api.servicetitan.io/settings/v2/tenant/1597802659/business-units",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "active",
+              "value": "true"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Business Units1",
+      "position": [
+        0,
+        420
+      ],
+      "id": "0f2a31fd-a8f3-4974-ad12-8323c66747a8",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves a paginated list of marketing campaigns from the ServiceTitan Marketing API. This tool allows filtering by campaign name, status, creation/modification date, and phone number. Useful for campaign reporting, validation, or automation workflows that depend on campaign metadata.",
+        "url": "https://api.servicetitan.io/marketing/v2/tenant/1597802659/campaigns",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "active",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `What kind of items should be returned (only active items will be returned by default)\nValues: [True, Any, False]`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Get Campaigns1",
+      "position": [
+        140,
+        360
+      ],
+      "id": "fa4a2cfd-9fbf-45e9-b03e-3cc836170e2a",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Search customer database filtered by phone number",
+        "url": "https://api.servicetitan.io/crm/v2/tenant/1597802659/customers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "phone",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `phone number you want to search customer data base by`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        -760,
+        -540
+      ],
+      "id": "79cb5df7-97c1-4154-bfe0-76486d5227e9",
+      "name": "Search Customer by Phone Number",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Cancels an open job",
+        "method": "PUT",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', `https://api.servicetitan.io/jpm/v2/tenant/1597802659/jobs/{jobId}/cancel\n\nReplace {jobId} with the job id you want to cancel.`, 'string') }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "reasonId",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `Required: true   \nType: integer (int64)   \nDescription: ID of job cancel reason\n    `, 'string') }}"
+            },
+            {
+              "name": "memo",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Required. Memo of job cancel reason`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Cancel Job",
+      "position": [
+        1120,
+        260
+      ],
+      "id": "a62c94c8-3ffd-4c0b-b5e8-215637ddf6b1",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Creates a job tied to a customer and location. Use this after confirming customer details.",
+        "method": "POST",
+        "url": "https://api.servicetitan.io/jpm/v2/tenant/1597802659/jobs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "ST-App-Key",
+              "value": "ak1.swl6jkxskyq4xtdsbnswx7dhv"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('JSON', ``, 'json') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "name": "Book Job",
+      "position": [
+        800,
+        260
+      ],
+      "id": "86b294a8-df7d-4edf-9156-233360dfd97e",
+      "connections": {
+        "ai_tool": [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "id": "Xonp5cYU0IPJE9D8",
+          "name": "ST Bearer Token"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get Locations": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Location1": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Customer Contacts1": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Look Up Customer Appointments": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Customer by Address": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Customer by Name": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create New Customer": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Customer Contact": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Appointment": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Jobs": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Invoices": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Memberships": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Calls": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Create Purchase Order": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Assign Technicians": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Get Installed Equipment": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Get Forms": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Get Form Submissions": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Get Adjustments": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Update Job": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Task": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Equipment": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Delete Contact": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Appointment": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Equipment": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Update Customer": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Contact": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Job Appointments": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Reschedule Appointment": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Pricebook Items": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Get Tasks": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Technicians": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Get Business Units": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Job Types": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Vendors": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Get Tags": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Task": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Form Submission": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Get Campaigns": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload File to Job": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Get Invoice by ID": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Payments": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Job Types1": {
+      "ai_tool": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Business Units1": {
+      "ai_tool": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Campaigns1": {
+      "ai_tool": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Customer by Phone Number": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cancel Job": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Book Job": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger original",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6e4dc5b6-0456-4c5a-adcf-90a2bbce6f17",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "fc3eeb695953474e8efcfc49d475389fad42c035300748de34265e023268d39d"
+  },
+  "id": "Pb53c23GNj27dI9u",
+  "tags": [
+    {
+      "createdAt": "2025-05-01T14:26:13.650Z",
+      "updatedAt": "2025-05-01T14:26:37.727Z",
+      "id": "poXDjs2n0qTwprck",
+      "name": "ST MCP Server"
+    }
+  ]
+}
