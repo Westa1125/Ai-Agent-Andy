@@ -1,0 +1,92 @@
+[
+  {
+    "name": "create-customer",
+    "method": "POST",
+    "endpoint": "/crm/v2/customers"
+  },
+  {
+    "name": "update-customer",
+    "method": "PUT",
+    "endpoint": "/crm/v2/customers/{id}"
+  },
+  {
+    "name": "get-customer-by-id",
+    "method": "GET",
+    "endpoint": "/crm/v2/customers/{id}"
+  },
+  {
+    "name": "get-customer-by-phone",
+    "method": "GET",
+    "endpoint": "/crm/v2/customers/search"
+  },
+  {
+    "name": "create-contact",
+    "method": "POST",
+    "endpoint": "/crm/v2/contacts"
+  },
+  {
+    "name": "update-contact",
+    "method": "PUT",
+    "endpoint": "/crm/v2/contacts/{id}"
+  },
+  {
+    "name": "get-jobs-by-customer-id",
+    "method": "GET",
+    "endpoint": "/jpm/v2/jobs"
+  },
+  {
+    "name": "get-appointments-by-job-id",
+    "method": "GET",
+    "endpoint": "/jpm/v2/appointments"
+  },
+  {
+    "name": "create-job",
+    "method": "POST",
+    "endpoint": "/jpm/v2/jobs"
+  },
+  {
+    "name": "reschedule-appointment",
+    "method": "PUT",
+    "endpoint": "/jpm/v2/appointments/{id}"
+  },
+  {
+    "name": "create-task",
+    "method": "POST",
+    "endpoint": "/task-management/v2/tasks"
+  },
+  {
+    "name": "get-invoices-by-job-id",
+    "method": "GET",
+    "endpoint": "/accounting/v2/invoices"
+  },
+  {
+    "name": "get-payments-by-invoice-id",
+    "method": "GET",
+    "endpoint": "/accounting/v2/payments"
+  },
+  {
+    "name": "get-membership-by-customer-id",
+    "method": "GET",
+    "endpoint": "/memberships/v2"
+  },
+  {
+    "name": "get-pricebook-item",
+    "method": "GET",
+    "endpoint": "/pricebook/v2/items"
+  },
+  {
+    "name": "get-technicians",
+    "method": "GET",
+    "endpoint": "/settings/v2/technicians"
+  },
+  {
+    "name": "get-job-types",
+    "method": "GET",
+    "endpoint": "/settings/v2/job-types"
+  },
+  {
+    "name": "get-tags",
+    "method": "GET",
+    "endpoint": "/settings/v2/tags"
+  }
+]
